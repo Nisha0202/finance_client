@@ -18,16 +18,15 @@ const Registration = () => {
       setError('PIN must be a 5-digit number');
       return;
     }
-    if (mobile.length !== 11 || isNaN(mobile)) {
+    if (mobile.length !== 4 || isNaN(mobile)) {
       setError('Enter a valid 11 digit number');
       return;
     }
 
     try {
-      const hashedPin = await bcrypt.hash(pin, 10);
       const response = await axios.post('http://localhost:5000/api/register', {
         name,
-        pin: hashedPin,
+        pin,
         mobile,
         email,
         role, // Include role in the registration data
