@@ -13,6 +13,8 @@ import Registration from './pages/Registration';
 import Login from './pages/Login';
 import Overview from './pages/Overview';
 import ProtectedRoutes from './ProtectedRoutes';
+import AllTransactions from './pages/AllTransactions';
+import ManageAccounts from './pages/ManageAccounts';
 
 
 const router = createBrowserRouter([
@@ -40,13 +42,21 @@ const router = createBrowserRouter([
         path: "/login",
         element: <Login/>,
       },
-      // {
-      //   path: "/overview",
-      //   element: <Overview/>,
-      // },
+
       {
         path: "/overview",
-        element: <ProtectedRoutes role='valid' component={Overview} />,
+        element: (
+          // Check for token and redirect to overview if valid
+          localStorage.getItem('usertoken') ? <Overview/> : <Navigate to="/" />
+        ),
+      },
+      {
+        path: "/alltransactions",
+        element: <ProtectedRoutes role='admin' component={AllTransactions} />,
+      },
+      {
+        path: "/manaage",
+        element: <ProtectedRoutes role='admin' component={ManageAccounts} />,
       },
   
 
@@ -62,16 +72,3 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   </React.StrictMode>,
 )
 
-
-
-
-// import React from 'react'
-// import ReactDOM from 'react-dom/client'
-// import App from './App.jsx'
-// import './index.css'
-
-// ReactDOM.createRoot(document.getElementById('root')).render(
-//   <React.StrictMode>
-//     <App />
-//   </React.StrictMode>,
-// )
