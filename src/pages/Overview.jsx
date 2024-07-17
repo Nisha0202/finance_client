@@ -10,7 +10,7 @@ const Overview = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem('usertoken');
         if (token) {
           const decoded = jwtDecode(token);
           console.log(decoded);
@@ -40,9 +40,9 @@ const Overview = () => {
   }
 
   return (
-    <div className="bg-gray-100 min-h-screen flex flex-col items-center justify-center py-6">
-      <div className="bg-white shadow-md rounded-lg p-6 max-w-md w-full mx-auto">
-        <h2 className="text-xl font-bold mb-4 text-center">User Dashboard Overview</h2>
+    <div className="bg-gray-100 h-screen-100 flex flex-col items-center justify-center py-6 px-4 inter">
+      <div className="bg-white shadow-md rounded-lg lg:p-6 p-4 max-w-md w-full mx-auto">
+        <h2 className="text-xl font-bold mb-4 text-center">Overview</h2>
         <div className="mb-4">
           <label className="block text-gray-700 font-bold mb-2">Name:</label>
           <p className="text-gray-900">{user.name}</p>
@@ -53,11 +53,15 @@ const Overview = () => {
         </div>
         <div className="mb-4">
           <label className="block text-gray-700 font-bold mb-2">Phone number:</label>
-          <p className="text-gray-900">{user.phone}</p>
+          <p className="text-gray-900">{user.mobile}</p>
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2">Account Balance:</label>
-          <p className="text-gray-900">${user.balance}</p>
+          <label className="block text-gray-700 font-bold mb-2">Role:</label>
+          <p className="text-gray-900">{user.role}</p>
+        </div>
+        <div className="mb-4">
+          <label className="block text-gray-700 font-bold mb-2">Account Balance: <span className="text-blue-500">{user.balance} taka</span></label>
+         
         </div>
         <div className="bg-yellow-200 text-yellow-800 rounded-lg p-4 mb-4">
           <p className="font-bold">Status: Pending Approval</p>
