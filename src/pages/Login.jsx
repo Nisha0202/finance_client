@@ -22,9 +22,9 @@ const Login = () => {
       const token = response.data.token;
       localStorage.setItem('usertoken', token); // Store token in localStorage
       setError('');;
-
       // Navigate to '/overview'
       navigate('/overview');
+      location.reload();
     } catch (error) {
       setError('Login failed. Please check your credentials.');
       console.error('Login error:', error);
@@ -36,7 +36,7 @@ const Login = () => {
       <form onSubmit={handleSubmit} className="bg-white shadow-md rounded p-6 mb-4 w-full max-w-md">
         <h2 className="text-xl font-bold mb-6 text-center">Login</h2>
         {error && <p className="text-red-500 mb-4">{error}</p>}
-        <div className="mb-4">
+        <div className="mb-4 text-sm">
           <label className="block text-gray-700 text-sm mb-2">
             Email or Mobile Number
           </label>
@@ -49,7 +49,7 @@ const Login = () => {
             required
           />
         </div>
-        <div className="mb-6">
+        <div className="mb-6 text-sm">
           <label className="block text-gray-700 text-sm mb-2">
             PIN
           </label>

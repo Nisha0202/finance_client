@@ -18,11 +18,13 @@ const Overview = () => {
           console.log(decoded);
           const userId = decoded.userId;
           const userRole = decoded.role;
+          const userPin = decoded.pin;
+
           console.log('User ID:', userId);
-          console.log('Role:', role);
+          console.log('Role:', userRole);
+          console.log('Pin:', userPin);
           setRole(userRole);
           const userResponse = await axios.get(`http://localhost:5000/api/user/${userId}`);
-          console.log('User Info:', userResponse.data);
           setUser(userResponse.data);
         }
       } catch (error) {
@@ -38,7 +40,7 @@ const Overview = () => {
   const handleLogout = () => {
     // Remove the token from localStorage
     localStorage.removeItem('usertoken');
-
+    location.reload();
     navigate('/');
   };
 
@@ -85,11 +87,11 @@ const Overview = () => {
         )}
         <div>
 
-          <div className='flex justify-between text-sm items-center'>
+          <div className='flex justify-between text-sm items-center relative bottom-0'>
             <button  onClick={handleLogout} className=" hover:text-red-700 text-red-500 font-bold  rounded" >
               Logout
             </button>
-            {role === 'admin' && ( <div>
+            {role === 'admin' && ( <div className='flex gap-2 items-center'>
             <Link to={'/alltransactions'} className="btn btn-sm hover:text-blue-700 text-blue-500 font-bold rounded-md" >
             Transactions
             </Link>

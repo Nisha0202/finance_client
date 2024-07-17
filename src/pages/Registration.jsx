@@ -19,7 +19,7 @@ const Registration = () => {
       return;
     }
     if (mobile.length !== 4 || isNaN(mobile)) {
-      setError('Enter a valid 11 digit number');
+      setError('Enter a valid 4 digit number');
       return;
     }
 
