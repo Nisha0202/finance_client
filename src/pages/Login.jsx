@@ -45,7 +45,6 @@ const Login = () => {
             value={emailOrMobile}
             onChange={(e) => setEmailOrMobile(e.target.value)}
             className=" border rounded w-full py-2 px-3 text-gray-700"
-            placeholder="Enter Email or Mobile Number"
             required
           />
         </div>
@@ -58,7 +57,6 @@ const Login = () => {
             value={pin}
             onChange={(e) => setPin(e.target.value)}
             className="border rounded w-full py-2 px-3 text-gray-700"
-            placeholder="Enter PIN"
             required
           />
         </div>
