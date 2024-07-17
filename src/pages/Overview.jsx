@@ -7,6 +7,7 @@ import { Link, useNavigate } from 'react-router-dom';
 const Overview = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [role, setRole] = useState(null);
   const navigate = useNavigate();
   useEffect(() => {
     const fetchUserData = async () => {
@@ -16,9 +17,10 @@ const Overview = () => {
           const decoded = jwtDecode(token);
           console.log(decoded);
           const userId = decoded.userId;
-          const role = decoded.role;
+          const userRole = decoded.role;
           console.log('User ID:', userId);
-
+          console.log('Role:', role);
+          setRole(userRole);
           const userResponse = await axios.get(`http://localhost:5000/api/user/${userId}`);
           console.log('User Info:', userResponse.data);
           setUser(userResponse.data);
@@ -87,12 +89,15 @@ const Overview = () => {
             <button  onClick={handleLogout} className=" hover:text-red-700 text-red-500 font-bold  rounded" >
               Logout
             </button>
+            {role === 'admin' && ( <div>
             <Link to={'/alltransactions'} className="btn btn-sm hover:text-blue-700 text-blue-500 font-bold rounded-md" >
             Transactions
             </Link>
-            <button  onClick={handleLogout} className="btn btn-sm hover:text-blue-700 text-blue-500 font-bold rounded-md" >
+            <Link  to={'/manaage'} className="btn btn-sm hover:text-blue-700 text-blue-500 font-bold rounded-md" >
            Accounts
-            </button>
+            </Link>
+            </div>
+               )}
           </div>
 
         </div>
