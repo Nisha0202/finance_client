@@ -11,6 +11,7 @@ import ErrorPage from './components/ErrorPage';
 import Registration from './pages/Registration';
 import Login from './pages/Login';
 import Overview from './pages/Overview';
+import ProtectedRoutes from './ProtectedRoutes';
 
 
 const router = createBrowserRouter([
@@ -31,10 +32,14 @@ const router = createBrowserRouter([
         path: "/login",
         element: <Login/>,
       },
+      // {
+      //   path: "/overview",
+      //   element: <Overview/>,
+      // },
       {
         path: "/overview",
-        element: <Overview/>,
-      }
+        element: <ProtectedRoutes role='valid' component={Overview} />,
+      },
   
 
 
