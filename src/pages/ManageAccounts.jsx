@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { IoIosClose } from "react-icons/io";
 
 const ManageAccounts = () => {
   const [users, setUsers] = useState([]);
   const [error, setError] = useState('');
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
     fetchUsers();
@@ -19,7 +21,6 @@ const ManageAccounts = () => {
     }
   };
 
-  const [search, setSearch] = useState('');
 
   useEffect(() => {
     fetchSearchUsers();
@@ -43,19 +44,41 @@ const ManageAccounts = () => {
     }
   };
 
+    // Function to clear the input field
+    const clearInput = () => {
+      setSearch('');
+    };
+
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-xl font-semibold mb-4">Manage Accounts</h1>
       {error && <p className="text-red-500">{error}</p>}
 
       <div className="mb-4 text-sm flex justify-between items-center">
-        <input
+        {/* <input
           type="text"
           className="border rounded p-2 w-56"
           placeholder="Search by name..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-        />
+        /> */}
+          <div className="relative">
+      <input
+        type="text"
+        className="border rounded p-2 pl-4 w-56"
+        placeholder="Search by name..."
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+      />
+      {search && (
+        <button
+          className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+          onClick={clearInput}
+        >
+          <IoIosClose className="h-5 w-5" aria-hidden="true" />
+        </button>
+      )}
+    </div>
         <Link to={'/'} className="btn btn-sm border-2 text-gray-600 rounded-md">
               Back
             </Link>
