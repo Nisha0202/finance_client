@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import {
   createBrowserRouter,
+  Navigate,
   RouterProvider,
 } from "react-router-dom";
 import './index.css'
@@ -20,9 +21,16 @@ const router = createBrowserRouter([
     element: <Root/>,
     errorElement: <ErrorPage />,
     children: [
+      // {
+      //   path: "/",
+      //   element: <Home/>,
+      // },
       {
         path: "/",
-        element: <Home/>,
+        element: (
+          // Check for token and redirect to overview if valid
+          localStorage.getItem('usertoken') ? <Navigate to="/overview" /> : <Home />
+        ),
       },
       {
         path: "/registration",
@@ -53,23 +61,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <RouterProvider router={router} />
   </React.StrictMode>,
 )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
